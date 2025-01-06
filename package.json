@@ -14,7 +14,7 @@
     "eject": "react-scripts eject",
     "license:add": "license-check-and-add add",
     "license:check": "license-check-and-add check",
-    "prepare": "husky install",
+    "prepare": "husky init",
     "release": "release-it",
     "start": "react-scripts start",
     "test": "react-scripts test"

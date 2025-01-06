@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, {useEffect, useState} from "react";
-import {Container, Layout, LeftContainer, RightContainer} from "./style";
-import {HeaderComponent, TableContainer} from "../Contacts/style";
+import React, { useEffect, useState } from "react";
+import { Container, Layout, LeftContainer, RightContainer } from "./style";
+import { HeaderComponent, TableContainer } from "../Contacts/style";
 import api from "../../services/api";
-import {getSession} from "../../services/auth";
+import { getSession } from "../../services/auth";
 import config from "../../util/sessionHeader";
-import {DataGrid} from "@material-ui/data-grid";
-import {FilePlus, ListOrdered, Sheet, UserPlus} from "lucide-react";
+import { DataGrid } from "@material-ui/data-grid";
+import { FilePlus, ListOrdered, Sheet, UserPlus } from "lucide-react";
 import ModalCreateGroup from "../../components/Group/CreateGroup";
-import {useJsonToCsv} from 'react-json-csv';
+import { useJsonToCsv } from 'react-json-csv';
 
-const {saveAsCsv} = useJsonToCsv();
+const { saveAsCsv } = useJsonToCsv();
 
 const GroupPage = () => {
     const [groups, setGroups] = useState([]);
@@ -61,25 +61,25 @@ const GroupPage = () => {
     });
 
     useEffect(() => {
-        async function getAllGroups() {
-            const {data: allGroups} = await api.get(`${getSession()}/all-groups`, config());
+        async function listChats() {
+            const { data: allGroups } = await api.get(`${getSession()}/all-groups`, config());
             setGroups(allGroups.response);
         }
 
-        getAllGroups();
+        listChats();
 
     }, []);
 
     return (
         <Layout>
-            <ModalCreateGroup handleClose={handleCloseCreate} open={openModalCreate}/>
+            <ModalCreateGroup handleClose={handleCloseCreate} open={openModalCreate} />
             <Container>
                 <LeftContainer>
                     <ul>
                         <li onClick={() => setSelected(1)}>
                             <div className={"wrapper-li"}>
                                 <div className={"wrapper-ic"}>
-                                    <ListOrdered/>
+                                    <ListOrdered />
                                 </div>
                                 <div className={"wrapper-text"}>
                                     <h2>
@@ -98,7 +98,7 @@ const GroupPage = () => {
                         }}>
                             <div className={"wrapper-li"}>
                                 <div className={"wrapper-ic"}>
-                                    <FilePlus/>
+                                    <FilePlus />
                                 </div>
                                 <div className={"wrapper-text"}>
                                     <h2>
@@ -114,7 +114,7 @@ const GroupPage = () => {
                         <li onClick={() => setSelected(2)}>
                             <div className={"wrapper-li"}>
                                 <div className={"wrapper-ic"}>
-                                    <UserPlus/>
+                                    <UserPlus />
                                 </div>
                                 <div className={"wrapper-text"}>
                                     <h2>
@@ -130,14 +130,14 @@ const GroupPage = () => {
                         <li onClick={() => {
                             saveAsCsv({
                                 data: rows,
-                                fields: {"id": "ID", "name": "Name"},
+                                fields: { "id": "ID", "name": "Name" },
                                 filename: `group-${getSession()}`
                             });
                             setSelected(3);
                         }}>
                             <div className={"wrapper-li"}>
                                 <div className={"wrapper-ic"}>
-                                    <Sheet/>
+                                    <Sheet />
                                 </div>
                                 <div className={"wrapper-text"}>
                                     <h2>
@@ -159,7 +159,7 @@ const GroupPage = () => {
                         </h2>
 
                         <div>
-                            <input placeholder={"Procurar grupo..."}/>
+                            <input placeholder={"Procurar grupo..."} />
                         </div>
                     </HeaderComponent>
 
